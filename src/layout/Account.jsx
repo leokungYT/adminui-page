@@ -25,6 +25,14 @@ export default function Nav() {
   const { user, logout } = useAuth();
   const finalNav = user?.id ? userNav : guestNav;
   const navigate = useNavigate();
+  const [searchTerm, setSearchTerm] = useState('');
+  const [tableData, setTableData] = useState([
+,    { id: 1, firstName: "จีรศักดิ์1", lastName: "พิมพ์คำไหล", email: "Oz@gmail.com", dapament: "พนักงาน",   status: "อยุ่" ,phone: "191" },
+    { id: 2, firstName: "จีรศักดิ์2", lastName: "พิมพ์คำไหล", email: "Oz1@gmail.com", dapament: "พนักงาน.",  status: "อยุ่", phone: "191" },
+    { id: 3, firstName: "จีรศักดิ์3", lastName: "พิมพ์คำไหล", email: "Oz2@gmail.com", dapament: "พนักงาน.",  status: "อยุ่", phone: "191" },
+    { id: 4, firstName: "จีรศักดิ์4", lastName: "พิมพ์คำไหล", email: "Oz3@gmail.com", dapament: "พนักงาน.",  status: "อยุ่" , phone: "191" }
+
+  ]);
 
   const handleLogout = () => {
     logout();
@@ -36,6 +44,17 @@ export default function Nav() {
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
+
+  const handleSearch = (event) => {
+    setSearchTerm(event.target.value);
+  };
+
+  const filteredData = tableData.filter((item) => {
+    return Object.values(item).some((value) =>
+      value.toString().toLowerCase().includes(searchTerm.toLowerCase())
+    );
+  });
+
 
   return (
     <div className="flex">
@@ -93,7 +112,7 @@ export default function Nav() {
   <div className="max-w-[80%] mx-auto">
     <div className="flex justify-between items-center">
       <p className='text-3xl  text-neutral-700 pl-4'>Account</p>
-      <input type="text" className="border border-gray-300 rounded-md px-4 py-2 w-full sm:w-3/6 mt-4" placeholder="Search..." />
+      <input type="text" className="border border-gray-300 rounded-md px-4 py-2 w-full sm:w-3/6 mt-4" onChange={handleSearch} placeholder="Search..." />
     </div>
     <div className="overflow-x-auto">
       <table className="table-auto w-full border-collapse border border-gray-300 mt-4">
@@ -110,108 +129,16 @@ export default function Nav() {
             <th className="px-2 py-1 bg-gray-200 border border-gray-300">ลบ</th>
           </tr>
         </thead>
-        <tbody>
-        <tr>
-              <td className="px-4 py-2 border border-gray-300 text-center">1</td>
-              <td className="px-4 py-2 border border-gray-300 text-center">จีรศักดิ์</td>
-              <td className="px-4 py-2 border border-gray-300 text-center">พิมพ์คำไหล</td>
-              <td className="px-4 py-2 border border-gray-300 text-center">Oz@gmail.com</td>
-              <td className="px-4 py-2 border border-gray-300 text-center">พนักงาน</td>
-              <td className="px-4 py-2 border border-gray-300 text-center">อยู่</td>
-              <td className="px-4 py-2 border border-gray-300 text-center">
-                09999999999
-              </td>
-              <td className="px-4 py-2 border border-gray-300 text-center">
-                <Link to="/Edituser">
-                  <button className="btn btn-outline btn-warning">แก้ไข</button>
-                </Link>
-              </td>
-              <td className="px-4 py-2 border border-gray-300 text-center">
-                <button className="btn btn-outline btn-error">ลบ</button>
-              </td>
-            </tr>
-            <tr>
-              <td className="px-4 py-2 border border-gray-300 text-center">2</td>
-              <td className="px-4 py-2 border border-gray-300 text-center">จีรศักดิ์</td>
-              <td className="px-4 py-2 border border-gray-300 text-center">พิมพ์คำไหล</td>
-              <td className="px-4 py-2 border border-gray-300 text-center">Oz@gmail.com</td>
-              <td className="px-4 py-2 border border-gray-300 text-center">พนักงาน</td>
-              <td className="px-4 py-2 border border-gray-300 text-center">อยู่</td>
-              <td className="px-4 py-2 border border-gray-300 text-center">
-                09999999999
-              </td>
-              <td className="px-4 py-2 border border-gray-300 text-center">
-                <Link to="/Edituser">
-                  <button className="btn btn-outline btn-warning">แก้ไข</button>
-                </Link>
-              </td>
-              <td className="px-4 py-2 border border-gray-300 text-center">
-                <button className="btn btn-outline btn-error">ลบ</button>
-              </td>
-            </tr>       <tr>
-              <td className="px-4 py-2 border border-gray-300 text-center">3</td>
-              <td className="px-4 py-2 border border-gray-300 text-center">จีรศักดิ์</td>
-              <td className="px-4 py-2 border border-gray-300 text-center">พิมพ์คำไหล</td>
-              <td className="px-4 py-2 border border-gray-300 text-center">Oz@gmail.com</td>
-              <td className="px-4 py-2 border border-gray-300 text-center">พนักงาน</td>
-              <td className="px-4 py-2 border border-gray-300 text-center">อยู่</td>
-              <td className="px-4 py-2 border border-gray-300 text-center">
-                09999999999
-              </td>
-              <td className="px-4 py-2 border border-gray-300 text-center">
-                <Link to="/Edituser">
-                  <button className="btn btn-outline btn-warning">แก้ไข</button>
-                </Link>
-              </td>
-              <td className="px-4 py-2 border border-gray-300 text-center">
-                <button className="btn btn-outline btn-error">ลบ</button>
-              </td>
-            </tr>       <tr>
-              <td className="px-4 py-2 border border-gray-300 text-center">4</td>
-              <td className="px-4 py-2 border border-gray-300 text-center">จีรศักดิ์</td>
-              <td className="px-4 py-2 border border-gray-300 text-center">พิมพ์คำไหล</td>
-              <td className="px-4 py-2 border border-gray-300 text-center">Oz@gmail.com</td>
-              <td className="px-4 py-2 border border-gray-300 text-center">พนักงาน</td>
-              <td className="px-4 py-2 border border-gray-300 text-center">อยู่</td>
-              <td className="px-4 py-2 border border-gray-300 text-center">
-                09999999999
-              </td>
-              <td className="px-4 py-2 border border-gray-300 text-center">
-                <Link to="/Edituser">
-                  <button className="btn btn-outline btn-warning">แก้ไข</button>
-                </Link>
-              </td>
-              <td className="px-4 py-2 border border-gray-300 text-center">
-                <button className="btn btn-outline btn-error">ลบ</button>
-              </td>
-            </tr>       <tr>
-              <td className="px-4 py-2 border border-gray-300 text-center">5</td>
-              <td className="px-4 py-2 border border-gray-300 text-center">จีรศักดิ์</td>
-              <td className="px-4 py-2 border border-gray-300 text-center">พิมพ์คำไหล</td>
-              <td className="px-4 py-2 border border-gray-300 text-center">Oz@gmail.com</td>
-              <td className="px-4 py-2 border border-gray-300 text-center">พนักงาน</td>
-              <td className="px-4 py-2 border border-gray-300 text-center">อยู่</td>
-              <td className="px-4 py-2 border border-gray-300 text-center">
-                09999999999
-              </td>
-              <td className="px-4 py-2 border border-gray-300 text-center">
-                <Link to="/Edituser">
-                  <button className="btn btn-outline btn-warning">แก้ไข</button>
-                </Link>
-              </td>
-              <td className="px-4 py-2 border border-gray-300 text-center">
-                <button className="btn btn-outline btn-error">ลบ</button>
-              </td>
-            </tr>       <tr>
-              <td className="px-4 py-2 border border-gray-300 text-center">6</td>
-              <td className="px-4 py-2 border border-gray-300 text-center">จีรศักดิ์</td>
-              <td className="px-4 py-2 border border-gray-300 text-center">พิมพ์คำไหล</td>
-              <td className="px-4 py-2 border border-gray-300 text-center">Oz@gmail.com</td>
-              <td className="px-4 py-2 border border-gray-300 text-center">พนักงาน</td>
-              <td className="px-4 py-2 border border-gray-300 text-center">อยู่</td>
-              <td className="px-4 py-2 border border-gray-300 text-center">
-                09999999999
-              </td>
+        <tbody>    
+          {filteredData.map(row => (
+            <tr key={row.id}>
+              <td className="px-4 py-2 border border-gray-300 text-center">{row.id}</td>
+              <td className="px-4 py-2 border border-gray-300 text-center">{row.firstName}</td>
+              <td className="px-4 py-2 border border-gray-300 text-center">{row.lastName}</td>
+              <td className="px-4 py-2 border border-gray-300 text-center">{row.email}</td>
+              <td className="px-4 py-2 border border-gray-300 text-center">{row.dapament}</td>
+              <td className="px-4 py-2 border border-gray-300 text-center">{row.status}</td>
+              <td className="px-4 py-2 border border-gray-300 text-center">{row.phone}</td>
               <td className="px-4 py-2 border border-gray-300 text-center">
                 <Link to="/Edituser">
                   <button className="btn btn-outline btn-warning">แก้ไข</button>
@@ -221,6 +148,7 @@ export default function Nav() {
                 <button className="btn btn-outline btn-error">ลบ</button>
               </td>
             </tr>
+            ))}
         </tbody>
       </table>
     </div>
